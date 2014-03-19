@@ -1,1 +1,1 @@
-Uses Python 3 and Pygame. Put `functions.py` somewhere your python installation can find it (check you python path for this).
+Uses Python 3 and Pygame. Put `functions.py` somewhere your Python installation can find it (check your Python path for this).
