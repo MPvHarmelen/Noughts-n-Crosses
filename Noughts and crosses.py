@@ -60,7 +60,7 @@ def make_a_move(mover):
         co = player_stuff(event)
     elif mover == computer:
         co = computer_stuff()
-       
+
     if return_cell(co) == empty:
         change_cell(co, turn)
 
@@ -69,7 +69,7 @@ def make_a_move(mover):
             return O
         else:
             return X
-        
+
     else:
         return turn
 
@@ -78,7 +78,7 @@ def player_stuff(event):
     column_clicked = pos[0]//(cellsize[0]+margin)
     row_clicked = pos[1]//(cellsize[1]+margin)
     return (column_clicked, row_clicked)
-        
+
 def computer_stuff():
     lines = board_to_lines()
     empty_list = empty_cells(gameboard)
@@ -87,7 +87,7 @@ def computer_stuff():
     # For defensive strategy, occupy middle asap
     if (gridsize//2,gridsize//2) in empty_list:
             return (gridsize//2, gridsize//2)
-    
+
     # Check if the computer can win
     for index in range(len(lines)):
         if lines[index].count(empty) == 1\
@@ -110,16 +110,16 @@ def computer_stuff():
         for index in range(len(lines)):
             if lines[index].count(player) == 0:
                 index_buffer.append(index)
-        
+
         if index_buffer != []:
             count_buffer = []
             for index in index_buffer:
                 count_buffer.append(( lines[index].count(computer) , index ))
-            
+
             best_index = sorted(count_buffer)[-1][1]
             co = (best_index, lines[best_index].index(empty))
 
-    
+
 
     # Make (x,y) coordinates of co
     if co != None:
@@ -145,7 +145,7 @@ def computer_stuff():
         if debug == 'computer_stuff': print('Nothing smart to do')
         if empty_list != []:
             return random.choice(empty_list)
-    
+
 def victory_checker():
     ''' If there is a winner, victory_checker returns tuple (p,q).
 p indicates row, column or diagonal ('r', 'c' and 'd' respectively).
@@ -183,7 +183,7 @@ def board_to_lines():
         lines.append([])
         for x_co in range(gridsize):
             lines[y_co].append(return_cell((x_co,y_co)))
-    
+
     # Columns
     for x_co in range(gridsize):
         lines.append([])
@@ -194,7 +194,7 @@ def board_to_lines():
     lines.append([])
     for co in range(gridsize):
         lines[gridsize*2].append(return_cell((co,co)))
-    
+
     # 2nd diagonal
     lines.append([])
     for co in range(gridsize):
@@ -225,8 +225,8 @@ def YesNo():
                     exit_loop = True
                     return False
         clock.tick(speed)
-    
-  
+
+
 # --- Shit needed for pygame to work, with
 #     a function I wrote to size the screen
 pygame.init()
@@ -245,8 +245,8 @@ done=False
 clock=pygame.time.Clock()
 
 # -------- Main Program Loop -----------
-while done==False:       
-        
+while done==False:
+
     for event in pygame.event.get(): # User did something
         if event.type == pygame.QUIT: # If user clicked close
             done=True # Flag that we are done so we exit the programme
@@ -264,7 +264,7 @@ while done==False:
 
     # Draw the screenn
     draw_screen()
-    
+
     # Limit to [speed] frames per second
     clock.tick(speed)
 
@@ -279,12 +279,12 @@ while done==False:
             print ('Yeah! I won at', place,"Do you want to play again? (y/n)")
         elif winner == player:
             print ('NO! You won at', place,"Do you want to play again? (y/n)")
-        
+
         if YesNo() == True:
             gameboard, turn = initialize_game()
         else:
             done = True
-        
+
     # Check for draw
     if empty_cells(gameboard) == []:
         print("It's a draw, do you want to play again? (y/n)")
@@ -292,7 +292,7 @@ while done==False:
             gameboard, turn = initialize_game()
         else:
             done = True
-    
+
 # Be IDLE friendly. If you forget this line, the program will 'hang'
 # on exit.
 pygame.quit ()
